@@ -3,6 +3,7 @@ int posizione;
 char campo[9] = {'0', '1', '2', '3', '4', '5', '6', '7', '8'};
 char giocatore;
 bool vinto = false;
+
 void scambia(char gioca){
 	if (gioca == 'x'){
 		giocatore = 'o';
@@ -10,13 +11,37 @@ void scambia(char gioca){
 		giocatore = 'x';
 	}
 }
+
+void convinto(char campo[9]) {
+    int vittoria[8][3] = {
+        {0, 1, 2},
+        {3, 4, 5},
+        {6, 7, 8},
+        {0, 3, 6},
+        {1, 4, 7},
+        {2, 5, 8},
+        {0, 4, 8},
+        {2, 4, 6}
+    };
+
+    for (int i = 0; i < 8; i++) {
+        int a = vittoria[i][0];
+        int b = vittoria[i][1];
+        int c = vittoria[i][2];
+
+        if (campo[a] == campo[b] && campo[b] == campo[c]) {
+            vinto = true;
+    	}
+    }
+}
+
 void gioca(char giocatore){
 	do {
-    printf("Scegli la posizione (0-8): ");
+    printf("%c Scegli la posizione (0-8): ", giocatore);
     scanf("%d", &posizione);
 
     if (posizione < 0 || posizione > 8 || campo[posizione] == 'x' || campo[posizione] == 'o') {
-        printf("Posizione non valida o già occupata. Riprova.\n");
+        printf("Posizione non valida o gia occupata. Riprova.\n");
     } else {
         break;
     }
@@ -25,6 +50,7 @@ void gioca(char giocatore){
 	
 	campo[posizione] = giocatore;
 }
+
 void mostracampo(char campo[9]){
 	for(int i = 0; i < 9; i++){
 		
@@ -49,6 +75,10 @@ int main(){
 	do{
 		gioca(giocatore);
 		mostracampo(campo);
+		convinto(campo);
+		if (vinto == true){
+			printf("Ha vinto %c", giocatore);
+		}
 		scambia(giocatore);
 	} while(vinto == false);
 
