@@ -1,6 +1,16 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 // < > ^ ^
+char campo[10][10];
 bool perso;
+int xfrutto, yfrutto;
+void generafrutto(){
+	xfrutto = (rand() % 8) + 1;
+	yfrutto = (rand() % 8) + 1;
+	campo[xfrutto][yfrutto] = '+';
+
+}
 void mostra(char campo[10][10]){
 	for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 10; j++) {
@@ -28,10 +38,11 @@ void controllapos(char campo[10][10], int posizionex, int posizioney){
 	}
 }
 int main() {
-	
-    char campo[10][10];
+    srand(time(NULL));
     bordi(campo);
+    generafrutto();
     mostra(campo);
+    
     
 
     return 0;
