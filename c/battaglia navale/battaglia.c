@@ -6,6 +6,9 @@ char campo1[10][10];
 char campo2[10][10];
 
 void mostracampo(bool giocatore1) {
+	
+	\
+	---
     char (*campo)[10] = giocatore1 ? campo1 : campo2;
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 10; j++) {
@@ -35,7 +38,7 @@ void numera(bool giocatore1) {
 bool posiziona(int colonna, int riga, char direzione, int lunghezza, bool giocatore1) {
     char (*campo)[10] = giocatore1 ? campo1 : campo2;
 
-    // Controlla se la barca entra nel campo
+    // hhiControlla se la barca entra nel campo
     if (direzione == 'o') { // Orizzontale
         if (colonna - lunghezza / 2 < 0 || colonna + lunghezza / 2 >= 10) {
             return false;
